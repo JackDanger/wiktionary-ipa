@@ -15,6 +15,7 @@ Fails on the following region formats
 
 """
 
+import json
 from xml import sax
 import re
 
@@ -49,7 +50,7 @@ class IpaParser(sax.handler.ContentHandler):
                 regions = region.group(1).split("|")
             if not region or (set(regions) & set(self.regions)):
                 for tran in transcriptions:
-                    print(self.title, tran)
+                    print(json.dumps({"word": self.title, "ipa": tran, "source": "wiktionary"}))
                 #print("regions={0}".format(", ".join(regions)), end=" - ")
 
             #
